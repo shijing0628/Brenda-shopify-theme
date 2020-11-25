@@ -1,0 +1,96 @@
+
+<div class="section4">
+        <h2 class="section4-title">{{section.settings.title}}</h2>
+         <div class="section4-col section4-background-image" style="background-image:url({{section.settings.image_3 | img_url: '1024x500', crop:'center'}})">
+            <div class="container">
+             {% for block in section.blocks %}
+                <div class="section4-col-item1">
+                <div class="section4-wrapper1">
+                    <div class="section4-image1"><img src="{{block.settings.image_1 | img_url: '372x496', crop:'center'}}"/></div>               
+                    <div class="section4-image2"> <img src="{{block.settings.image_2 | img_url: '338x236', crop:'center'}}"/></div>
+                 </div>
+                </div>  
+                <div class="section4-col-item2">
+                    <div class="section4-wrapper2">
+                        <div class="section4-discription">{{block.settings.title}}</div>
+                        <a class="section4-btn btn" href="{{block.settings.blog_button}}" style="background-color: {{block.settings.blog_button_color}}">
+                        {{block.settings.buttontext}}
+                        </a>
+                    </div>
+                </div>
+            {%endfor%}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "blog",
+  "class": "blog",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "title"
+    },
+    {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "blog background image"
+        }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "blog",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "blog image 1"
+        },
+         {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "blog image 2"
+        },
+         
+         {
+          "type": "textarea",
+          "id": "title",
+          "label": "discription"
+        },
+         {
+          "type": "text",
+          "id": "buttontext",
+          "label": "button text"
+        },
+         {
+          "type": "url",
+          "id": "blog_button",
+          "label": "blog button"
+        },
+           {
+          "type": "color",
+          "id": "blog_button_color",
+          "label": "blog button color"
+        }
+       
+      ]      
+    }
+  ],
+  "presets": [
+    {
+      "name": "blog",
+      "category": "homepage",
+      "settings": {
+      },
+      "blocks": [
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

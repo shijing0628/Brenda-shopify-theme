@@ -1,0 +1,84 @@
+
+<div class="section6">  
+        <h2 class="section6-title">{{section.settings.title}}</h2>
+            <div class="section6-background-image" style="background-image:url({{section.settings.image | img_url: '1024x500'}})">
+            <div class="container">
+                {% for block in section.blocks %}
+            <div class="section6-col-item">    
+                <div class="section6-discription">{{block.settings.description}}</div>
+                    <a class="section6-btn btn" href="{{block.settings.blog_button}}" style="background-color: {{block.settings.blog_button_color}}">
+                    {{block.settings.buttontext}}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% schema %}
+{
+  "name": "About Us",
+  "class": "index-section about_us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+          "type": "image_picker",
+          "id": "image",
+          "label": "background image"
+        }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "about us",
+      "settings": [
+        
+        
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "discription"
+        },
+         {
+          "type": "url",
+          "id": "buttonurl",
+          "label": "button url"
+        },
+         {
+          "type": "text",
+          "id": "buttontext",
+          "label": "button text"
+        },
+        {
+          "type": "color",
+          "id": "about_button_color",
+          "label": "about us button color"
+        }
+      ]      
+    }
+   
+  ],
+  "presets": [
+    {
+      "name": "About us",
+      "category": "homepage",
+      "settings": {
+      },
+      "blocks": [
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,75 @@
+{% for block in section.blocks %}
+  <div class="section1">   
+  
+      <div class="container home-image">
+          <video class="background-video" width="100%" height="auto" loop autoplay>
+          <source src="{{'dress1-cut2.mp4' | file_url}}" type="video/mp4">    
+          Your browser does not support the video tag.
+          </video>
+        <div class="home-section1-title">
+          {{ block.settings.title }}
+        </div>
+        <a class="home-shopping-btn btn" href="{{block.settings.buttonurl}}">{{block.settings.buttontext}}</a>
+      </div>
+     
+  </div>
+{% endfor %}
+
+
+
+
+{% schema %}
+{
+  "name": "Brenda Video",
+  "class": "index-section video",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "video",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "video url"
+        },
+         {
+          "type": "url",
+          "id": "buttonurl",
+          "label": "button url"
+        },
+         {
+          "type": "text",
+          "id": "buttontext",
+          "label": "button text"
+        }
+      ]      
+    }
+   
+  ],
+  "presets": [
+    {
+      "name": "Brenda Video",
+      "category": "Image",
+      "settings": {
+      },
+      "blocks": [
+        {
+          "type": "video"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

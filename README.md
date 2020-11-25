@@ -1,1 +1,2 @@
-Brenda-shopify-theme
+# brenda-theme
+Brenda's Theme

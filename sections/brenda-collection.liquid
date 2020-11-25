@@ -1,0 +1,116 @@
+<div class="section2">
+  <div class="container">
+    <div class="section2-vol1">
+      <h2 class="section2-title">{{ section.settings.title}}</h2>
+        <div class="section2-discription">
+            {{section.settings.discription}}
+        </div>
+    </div>
+     <div class="section2-vol2">
+      {% for block in section.blocks %}      
+          <h2 class="section2-item-main-title">{{block.settings.title}}</h2>
+            <div class="section2-vol2-item">
+          {% assign collection_product = all_products[block.settings.title] %}
+            <a href="{{collection_product.url}}">
+            <img class="section2-image" src="{{collection_product.featured_image | img_url: '230x375', crop:'center'}}"/>
+              <h4 class="section2-item-sub-title">
+              {{ collection_product.title }}
+              </h4>
+              <h5 class="section2-product-price">
+              {{collection_product.price | money}}
+              </h5>
+              
+            {% comment %} add {% endcomment %}
+             {% assign color_index = 0 %}
+            {% for option in collection_product.options %}
+                {% assign color_option =  option |  downcase %}
+                  {% if color_option == 'color' %}
+                        {% assign color_index = forloop.index0 %}     
+                        {% endif %}
+            {% endfor %}
+
+            {% assign color_swatch = '' %}
+            {% assign color_values = '' %}
+
+            {% for variant in collection_product.variants %}
+
+              {% assign color_value = variant.options[color_index] %}
+
+              {% unless color_values contains color_value or color_value== 'Default Title' %}
+
+                {% assign color_values = color_values | join: ',' %}	                     
+                  {% assign color_values = color_values | append: ',' | append: color_value %} 		          					
+                  {% assign color_values =color_values | split: ',' %}
+                    {% capture color_link %}
+                        <div class="color-option-border" style="display:inline-block;">                     
+                         <a href="#" class="color-option" style="background-color:{{color_value}};" data-image="{{ variant.featured_image | img_url: '230x375', crop:'center' }}"></a>
+                         </div>
+                      {% endcapture%}  
+                      {% assign color_swatch = color_swatch | append: color_link %}    
+                {% endunless %}
+            {% endfor %}
+            <div class="collection-swatch1">
+              {{color_swatch}}
+            </div>  
+              </a>  
+            </div>  
+     {% endfor %}
+
+      </div>
+  </div>
+</div>
+
+ <script>
+    $('.color-option').on('click', function(e){
+     e.preventDefault();
+     var selectValue = $(this).attr("data-image");
+     console.log($('.section2-vol2-item').find('.section2-image'));
+    $(this).closest('.section2-vol2-item').find('.section2-image').attr('src',selectValue);
+
+     })
+ </script>         
+
+{% schema %}
+{
+  "name": "brenda collection",
+  "class": "collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "discription",
+      "label": "discription"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "title",
+          "label": "Title"
+        }
+      ]      
+    }
+  ],
+  "presets": [
+    {
+      "name": "brenda collection",
+      "category": "Image",
+      "settings": {
+      },
+      "blocks": [
+        {
+          "type": "product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

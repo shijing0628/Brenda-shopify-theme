@@ -1,0 +1,62 @@
+
+<div class="section3">
+ <div class="container">
+    <h2 class="section3-title">{{section.settings.title}}</h2>
+    <div class="section3-col">
+      {% for block in section.blocks%}
+        <div class="section3-col-item">
+          {% assign collection_title=collections[block.settings.title] %}
+            {% if collection_title.image %}
+            <img class="section3-image" src="{{collection_title.image | img_url: '250x250', crop:'center'}}"/>
+            {% endif %}
+        
+            <h3 class="section3-sub-title">
+            {{collection_title.title}}
+            </h3>
+          </div>
+    {% endfor %}
+    </div>
+ </div>
+</div>
+
+
+
+{% schema %}
+{
+  "name": "brenda feature collection",
+  "class": "index-section collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "title",
+          "label": "Title"
+        }
+      ]      
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage brenda feature collection",
+      "category": "Image",
+      "settings": {
+      },
+      "blocks": [
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

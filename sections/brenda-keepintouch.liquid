@@ -1,0 +1,91 @@
+
+<div class="section5">
+  <div class="container section5-background-image" style="background-image:url({{section.settings.image | img_url: '1540x300', crop:'center'}})">
+    <h2 class="section5-title">{{ section.settings.title}}</h2>
+    {% for block in section.blocks %}
+    <div class="section5-discription">{{block.settings.discription}}</div>
+     <div class="section5_email_area">
+          <div class="html-text">{{ block.settings.html_area }}</div>
+          <a class="section5-btn btn" href="{{block.settings.signup_button}}" style="background-color: {{block.settings.email_button_color}}">
+          {{block.settings.buttontext}}
+          </a>
+        </div>
+    {% endfor%}
+  </div>
+</div>
+
+
+
+
+{% schema %}
+{
+"name": "Keep in touch",
+"class": "index-section email_info",
+"settings": [
+  {
+    "type": "text",
+    "id": "title",
+    "label": "title"
+  },
+  {
+    "type": "image_picker",
+    "id": "image",
+    "label": "email image"
+  }
+],
+"blocks": [
+  {
+    "type": "text",
+    "name": "index-section title ",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "text"
+      },
+   
+        {
+      "type": "textarea",
+      "id": "discription",
+      "label": "discription"
+    },
+      {
+    "type": "html",
+    "id": "html_area",
+    "label": "email input info",
+    "default": "<div><p>please input your Email adress</p></div>"
+    },
+    {
+          "type": "text",
+          "id": "buttontext",
+          "label": "button text"
+        },
+         {
+          "type": "url",
+          "id": "signup_button",
+          "label": "sign up button"
+        },
+           {
+          "type": "color",
+          "id": "email_button_color",
+          "label": "signup button color"
+        }
+      
+    ]      
+  }
+],
+"presets": [
+  {
+    "name": "keep in touch",
+    "category": "homepage",
+    "settings": {
+    },
+    "blocks": [
+      {
+        "type": "text"
+      }
+    ]
+  }
+]
+}
+{% endschema %}

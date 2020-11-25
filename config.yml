@@ -1,0 +1,16 @@
+development: &COMMON
+  password: 414f42184117d997ece9fd8e3bd407cd
+  theme_id: 95622332461
+  store: brenda-dev-store.myshopify.com
+  bucket_size: 40
+  refill_rate: 2
+  timeout: 30s
+  ignore_files:
+    - .git/
+    - .gitignore
+    - config/settings_data.json
+    - assets/*.jpg
+    - assets/*.png
+    - theme.lock
+    - snippets/swymSnippet.liquid
+    - snippets/swym-product-view.liquid
